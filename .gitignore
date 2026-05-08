@@ -36,3 +36,6 @@ htmlcov/
 
 # Ruff / linters
 .ruff_cache/
+
+# Scripts de desarrollo local (no van al repo publico)
+registrar_recurso.py

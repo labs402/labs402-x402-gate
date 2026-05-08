@@ -4,6 +4,8 @@ import logging
 import os
 from dataclasses import dataclass
 
+from dotenv import load_dotenv
+
 logger = logging.getLogger(__name__)
 
 # Mint USDC en Solana mainnet-beta
@@ -34,6 +36,7 @@ def load_config() -> Config:
     Carga la configuracion desde variables de entorno.
     Lanza ValueError si falta alguna variable obligatoria.
     """
+    load_dotenv()
     private_key = os.environ.get("SOLANA_PRIVATE_KEY", "").strip()
     if not private_key:
         raise ValueError(
