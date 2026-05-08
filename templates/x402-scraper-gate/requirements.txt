@@ -1,0 +1,8 @@
+# Instalar el paquete principal primero (incluye x402, fastapi, uvicorn, httpx)
+# pip install -e ../..
+
+# Si prefieres instalacion directa desde PyPI (cuando este disponible):
+# pip install labs402-x402-gate
+
+# Dependencias adicionales de este template
+httpx>=0.28.0

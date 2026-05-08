@@ -84,14 +84,17 @@ class TestChargeAndServe:
     @pytest.mark.asyncio
     async def test_config_rechaza_sin_private_key(self):
         """load_config debe fallar si falta SOLANA_PRIVATE_KEY."""
+        from unittest.mock import patch
         from labs402_x402_gate.config import load_config
 
         env_backup = os.environ.copy()
         os.environ.pop("SOLANA_PRIVATE_KEY", None)
         os.environ["SOLANA_WALLET_ADDRESS"] = "TestWallet"
         try:
-            with pytest.raises(ValueError, match="SOLANA_PRIVATE_KEY"):
-                load_config()
+            # patch load_dotenv para que no recargue el .env real durante el test
+            with patch("labs402_x402_gate.config.load_dotenv"):
+                with pytest.raises(ValueError, match="SOLANA_PRIVATE_KEY"):
+                    load_config()
         finally:
             os.environ.clear()
             os.environ.update(env_backup)
